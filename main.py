@@ -30,10 +30,11 @@ def SellingMachine():
     price = Products[chosenProduct].price
     print(price)
     payment = float(input("How many Euros are you putting in the machine?"))
-   # print (payment)
     change = payment - price
-  #  print (change)
     paymentTypes = [500,200,100,50,20,10,5,2,1,0.5,0.2,0.1,0.05,0.02,0.009]
+    if payment < price:
+        print("Not enough money")
+        sys.exit()
     print("You get:")
     for pay in paymentTypes:
         changetemp = 0
@@ -42,12 +43,18 @@ def SellingMachine():
             change -= changetemp * pay
         if changetemp >= 1:
             if pay >= 5:
-                print(changetemp,pay,"€-banknotes")
+                if changetemp == 1:
+                    print(changetemp,pay,"€-banknote")
+                else:
+                    print(changetemp,pay,"€-banknotes")
             elif pay == 0.009:
-                print(changetemp,"0,01 €-coins")
+                print(changetemp,"0,01 €-coin")
             else:
-                print(changetemp,pay,"€-coins")
+                if changetemp == 1:
+                    print(changetemp,pay,"€-coin")
+                else:
+                    print(changetemp,pay,"€-coins")
 
 
-chosenProduct =ChooseProduct()
+chosenProduct = ChooseProduct()
 SellingMachine()
